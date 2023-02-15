@@ -1,19 +1,46 @@
-extends Area2D
-
+extends KinematicBody2D
+signal hit
 
 export var speed = 400 
 var screen_size
+var movement = Vector2.ZERO
 
 func _ready():
-	#screen_size = get_viewport_rect().size
-	hide()
-func _process(delta):
-	var velocity = Vector2.ZERO # The player's movement vector.
+	screen_size = get_viewport_rect().size
+	#hide()
+func _physics_process(delta):
+	var velocity = Vector2.ZERO 
 	if Input.is_action_pressed("move_right"):
 		velocity.x += 1
-	if Input.is_action_pressed("move_left"):
+	elif Input.is_action_pressed("move_left"):
 		velocity.x -= 1
-	if Input.is_action_pressed("move_down"):
+	elif Input.is_action_pressed("move_down"):
 		velocity.y += 1
-	if Input.is_action_pressed("move_up"):
+	elif Input.is_action_pressed("move_up"):
 		velocity.y -= 1
+		
+	if velocity.length() > 0:
+		velocity = velocity.normalized() * speed
+		$AnimatedSprite.play()
+	else:
+		$AnimatedSprite.stop()
+	position += velocity * delta
+	position.x = clamp(position.x, 0, screen_size.x)
+	position.y = clamp(position.y, 0, screen_size.y)
+	if velocity.x != 0:
+		$AnimatedSprite.animation = "fly"
+		$AnimatedSprite.flip_v = false
+		$AnimatedSprite.flip_h = velocity.x < 0
+		
+func start(pos):
+	position = pos
+	show()
+	$CollisionShape2D.disabled = false
+
+func _on_Player_body_entered(body):
+	emit_signal("hit")
+	
+	movement = movement.normalized()
+	move_and_slide(movement * speed)
+	
+
