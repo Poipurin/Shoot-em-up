@@ -36,6 +36,5 @@ func start(pos):
 	show()
 	$CollisionShape2D.disabled = false
 
-
 func _on_Player_body_entered(body):
 	emit_signal("hit")
