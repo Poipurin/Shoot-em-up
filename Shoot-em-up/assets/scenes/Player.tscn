@@ -1,27 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=2 format=2]
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 18.0
-
-[sub_resource type="CapsuleShape2D" id=2]
-
-[sub_resource type="SpriteFrames" id=3]
-animations = [ {
-"frames": [  ],
-"loop": true,
-"name": "default",
-"speed": 5.0
-} ]
 
 [node name="Player" type="Area2D"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
-
-[node name="Bullets" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Bullets"]
-shape = SubResource( 2 )
-
-[node name="PlayerParticles" type="AnimatedSprite" parent="."]
-frames = SubResource( 3 )
