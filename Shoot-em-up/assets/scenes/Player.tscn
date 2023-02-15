@@ -13,14 +13,13 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[node name="Player" type="Area2D"]
+[node name="Player" type="KinematicBody2D"]
 script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( 172, 174 )
 frames = SubResource( 2 )
 animation = "fly"
-
-[connection signal="body_entered" from="." to="." method="_on_Player_body_entered"]

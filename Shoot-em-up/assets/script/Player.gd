@@ -1,13 +1,14 @@
-extends Area2D
+extends KinematicBody2D
 signal hit
 
 export var speed = 400 
 var screen_size
+var movement = Vector2.ZERO
 
 func _ready():
 	screen_size = get_viewport_rect().size
-	hide()
-func _process(delta):
+	#hide()
+func _physics_process(delta):
 	var velocity = Vector2.ZERO 
 	if Input.is_action_pressed("move_right"):
 		velocity.x += 1
@@ -38,3 +39,8 @@ func start(pos):
 
 func _on_Player_body_entered(body):
 	emit_signal("hit")
+	
+	movement = movement.normalized()
+	move_and_slide(movement * speed)
+	
+
