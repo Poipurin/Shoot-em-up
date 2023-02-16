@@ -10,7 +10,8 @@ onready var spawn = $Spawn
 
 func _ready():
 	screen_size = get_viewport_rect().size
-	#hide()
+	position = Vector2(240, 600)
+	
 func _physics_process(delta):
 	var velocity = Vector2.ZERO 
 	if Input.is_action_pressed("move_right"):
@@ -30,7 +31,7 @@ func _physics_process(delta):
 		position.y = clamp(position.y, 0, screen_size.y)
 		$AnimatedSprite.animation = "fly"
 		$AnimatedSprite.flip_v = false
-		$AnimatedSprite.flip_h = velocity.x < 0
+		$AnimatedSprite.flip_h = false
 		
 func start(pos):
 	position = pos

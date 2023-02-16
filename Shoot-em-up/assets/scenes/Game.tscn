@@ -20,11 +20,10 @@ margin_bottom = 40.0
 texture = ExtResource( 2 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 0, 1 )
+position = Vector2( 242, 600 )
 __meta__ = {
 "_edit_group_": true
 }
-speed = 400
 
 [node name="bullets" parent="Player" instance=ExtResource( 6 )]
 
