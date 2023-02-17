@@ -11,27 +11,30 @@ onready var spawn = $Spawn
 func _ready():
 	screen_size = get_viewport_rect().size
 	position = Vector2(240, 600)
+	$AnimatedSprite.play("fly")
 	
 func _physics_process(delta):
 	var velocity = Vector2.ZERO 
 	if Input.is_action_pressed("move_right"):
-		velocity.x += 1
+		$AnimatedSprite.animation = "right"
+		velocity.x += 1	
 	elif Input.is_action_pressed("move_left"):
 		velocity.x -= 1
-	elif Input.is_action_pressed("move_down"):
+		$AnimatedSprite.animation = "left"
+	else:
+		$AnimatedSprite.animation = "fly"
+		
+	if Input.is_action_pressed("move_down"):
 		velocity.y += 1
-	elif Input.is_action_pressed("move_up"):
+		
+	if Input.is_action_pressed("move_up"):
 		velocity.y -= 1
 		
 	if velocity.length() > 0:
 		velocity = velocity.normalized() * speed
-		$AnimatedSprite.play()
 		position += velocity * delta
 		position.x = clamp(position.x, 0, screen_size.x)
 		position.y = clamp(position.y, 0, screen_size.y)
-		$AnimatedSprite.animation = "fly"
-		$AnimatedSprite.flip_v = false
-		$AnimatedSprite.flip_h = false
 		
 func start(pos):
 	position = pos
