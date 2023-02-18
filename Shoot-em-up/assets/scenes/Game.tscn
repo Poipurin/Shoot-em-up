@@ -52,3 +52,8 @@ tile_data = PoolIntArray( 327691, 9, 0, 327703, 9, 0, 393236, 9, 0, 393244, 11, 
 [node name="Camera2D" type="Camera2D" parent="."]
 anchor_mode = 0
 current = true
+
+[node name="enemTimerTest" type="Timer" parent="."]
+process_mode = 0
+
+[connection signal="timeout" from="enemTimerTest" to="." method="_on_enemTimerTest_timeout"]
