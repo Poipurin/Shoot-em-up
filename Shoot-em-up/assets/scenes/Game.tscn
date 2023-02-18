@@ -8,10 +8,7 @@
 [ext_resource path="res://assets/scenes/bullets.tscn" type="PackedScene" id=6]
 [ext_resource path="res://assets/art/environment/tilemaps/tilemap1.tres" type="TileSet" id=7]
 [ext_resource path="res://assets/scenes/ParallaxBackground.gd" type="Script" id=8]
-
-[sub_resource type="CapsuleShape2D" id=3]
-radius = 1.0
-height = 6.0
+[ext_resource path="res://assets/scenes/Enemies.tscn" type="PackedScene" id=9]
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 3 )
@@ -29,11 +26,7 @@ position = Vector2( 240, 600 )
 [node name="HUD" parent="." instance=ExtResource( 4 )]
 script = ExtResource( 5 )
 
-[node name="Enemies" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemies"]
-position = Vector2( 0, 1 )
-shape = SubResource( 3 )
+[node name="Enemies" parent="." instance=ExtResource( 9 )]
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 script = ExtResource( 8 )

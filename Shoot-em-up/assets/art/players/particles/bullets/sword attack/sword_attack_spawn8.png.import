@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Background_test.png-d6f81814121aa286d072f280eb25d2ff.stex"
+path="res://.import/sword_attack_spawn8.png-10c10d901c6eb9b7659d04877041937e.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/environment/backgrounds/Background_test.png"
-dest_files=[ "res://.import/Background_test.png-d6f81814121aa286d072f280eb25d2ff.stex" ]
+source_file="res://assets/art/players/particles/bullets/sword attack/sword_attack_spawn8.png"
+dest_files=[ "res://.import/sword_attack_spawn8.png-10c10d901c6eb9b7659d04877041937e.stex" ]
 
 [params]
 
