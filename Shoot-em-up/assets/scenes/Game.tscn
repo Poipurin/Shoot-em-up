@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://assets/scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/art/environment/backgrounds/stage_1/largebg.png" type="Texture" id=2]
@@ -6,20 +6,8 @@
 [ext_resource path="res://assets/scenes/HUD.tscn" type="PackedScene" id=4]
 [ext_resource path="res://assets/script/HUD.gd" type="Script" id=5]
 [ext_resource path="res://assets/scenes/bullets.tscn" type="PackedScene" id=6]
-[ext_resource path="res://assets/art/enemies/mobs/cloud/clod_idle4.png" type="Texture" id=7]
 [ext_resource path="res://assets/scenes/ParallaxBackground.gd" type="Script" id=8]
 [ext_resource path="res://assets/scenes/Enemies.tscn" type="PackedScene" id=9]
-[ext_resource path="res://assets/art/enemies/mobs/cloud/clod_idle1.png" type="Texture" id=10]
-[ext_resource path="res://assets/art/enemies/mobs/cloud/clod_idle2.png" type="Texture" id=11]
-[ext_resource path="res://assets/art/enemies/mobs/cloud/clod_idle3.png" type="Texture" id=12]
-
-[sub_resource type="SpriteFrames" id=1]
-animations = [ {
-"frames": [ ExtResource( 10 ), ExtResource( 11 ), ExtResource( 12 ), ExtResource( 7 ) ],
-"loop": true,
-"name": "default",
-"speed": 5.0
-} ]
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 3 )
@@ -54,12 +42,6 @@ centered = false
 light_mask = 0
 motion_scale = Vector2( 1, 0 )
 motion_mirroring = Vector2( 300, 200 )
-
-[node name="TileMap" type="AnimatedSprite" parent="ParallaxBackground/ParallaxLayer2"]
-position = Vector2( -1, 56 )
-frames = SubResource( 1 )
-frame = 2
-playing = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
 anchor_mode = 0
