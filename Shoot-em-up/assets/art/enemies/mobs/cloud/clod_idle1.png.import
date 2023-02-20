@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Background_test.png-d6f81814121aa286d072f280eb25d2ff.stex"
+path="res://.import/clod_idle1.png-b666d2d3960b2c7dc2ac605588ccaec1.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/environment/backgrounds/Background_test.png"
-dest_files=[ "res://.import/Background_test.png-d6f81814121aa286d072f280eb25d2ff.stex" ]
+source_file="res://assets/art/enemies/mobs/cloud/clod_idle1.png"
+dest_files=[ "res://.import/clod_idle1.png-b666d2d3960b2c7dc2ac605588ccaec1.stex" ]
 
 [params]
 

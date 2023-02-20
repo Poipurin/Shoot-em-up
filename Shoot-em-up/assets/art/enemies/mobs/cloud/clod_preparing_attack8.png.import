@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Background_test.png-d6f81814121aa286d072f280eb25d2ff.stex"
+path="res://.import/clod_preparing_attack8.png-b11f02c61830d5056208c36761f27185.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/environment/backgrounds/Background_test.png"
-dest_files=[ "res://.import/Background_test.png-d6f81814121aa286d072f280eb25d2ff.stex" ]
+source_file="res://assets/art/enemies/mobs/cloud/clod_preparing_attack8.png"
+dest_files=[ "res://.import/clod_preparing_attack8.png-b11f02c61830d5056208c36761f27185.stex" ]
 
 [params]
 
