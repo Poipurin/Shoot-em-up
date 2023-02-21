@@ -4,9 +4,7 @@ signal hit
 export var speed = 400 
 var screen_size
 var movement = Vector2.ZERO
-var Bullet = preload("res://assets/scenes/bullets.tscn")
-var canShoot = true
-onready var spawn = $Spawn
+
 
 func _ready():
 	screen_size = get_viewport_rect().size
@@ -46,19 +44,3 @@ func _on_Player_body_entered(body):
 	
 	movement = movement.normalized()
 	move_and_slide(movement * speed)
-	
-func _on_ShootSpeed_timeout():
-	canShoot = true
-	
-func _process(delta):
-	if	Input.is_action_pressed("shoot") and canShoot:
-		shoot()
-		
-func shoot():
-	var bullet = Bullet.instance()
-	bullet.position = spawn.global_position
-	get_tree().current_scene.add_child(bullet)
-	
-	$ShootSpeed.start()
-	canShoot = false
-	
