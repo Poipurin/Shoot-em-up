@@ -41,6 +41,7 @@ tracks/0/keys = {
 }
 
 [node name="Bullet" type="KinematicBody2D"]
+z_index = -1
 script = ExtResource( 2 )
 bulletImpact = ExtResource( 3 )
 

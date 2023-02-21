@@ -1,6 +1,9 @@
 extends KinematicBody2D
 signal hit
 
+#RECOGE LA ESCENA "BULLET" (Ex script de Spawner)
+export var bulletScene : PackedScene
+
 export var speed = 400 
 var screen_size
 var movement = Vector2.ZERO
@@ -44,3 +47,11 @@ func _on_Player_body_entered(body):
 	
 	movement = movement.normalized()
 	move_and_slide(movement * speed)
+
+#CREA UNA INSTANCIA DE BALA QUE SURGE DESDE PLAYER (Ex script de Spawner)
+func _unhandled_input(event):
+	if (event.is_action_pressed("shoot")):
+		var bullet = bulletScene.instance() as Node2D
+		get_parent().add_child(bullet)
+		bullet.global_position = self.global_position
+		bullet.direction = Vector2(0, -1)
