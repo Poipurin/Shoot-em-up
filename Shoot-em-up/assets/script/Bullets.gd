@@ -1,15 +1,17 @@
-extends Area2D
+extends KinematicBody2D
 
 
 var speed = 600
+export var bulletImpact : PackedScene
+var direction = Vector2.UP
 
-var bullet_status = 0
-
-func _physics_process(delta):
-	position.y -= delta * speed
-	#if bullet_status == 0:
-		#$PlayerBullets.animation = "spawn"
-		#if $PlayerBullets.animation_finished() == true:
-			#bullet_status = 1
-	#if bullet_status == 1:	
-		#$PlayerBullets.animation = "idle"
+func _ready():
+	$AnimationPlayer.play("idlebullet")
+	
+func _process(delta):
+	var collisionResult = move_and_collide(direction * speed * delta)
+	if collisionResult != null:
+		var impact = bulletImpact.instance() as Node2D
+		get_parent().add_child(impact)
+		impact.global_position = collisionResult.position
+		queue_free()
