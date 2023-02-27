@@ -1,29 +1,26 @@
 extends KinematicBody2D
 signal hit
-
-#RECOGE LA ESCENA "BULLET" (Ex script de Spawner)
 export var bulletScene : PackedScene
-
 export var speed = 400 
 var screen_size
 var movement = Vector2.ZERO
-
-
+	
+	
 func _ready():
 	screen_size = get_viewport_rect().size
 	position = Vector2(240, 600)
-	$AnimatedSprite.play("fly")
+	$AnimationPlayer.play("RedScarf")
 	
 func _physics_process(delta):
 	var velocity = Vector2.ZERO 
 	if Input.is_action_pressed("move_right"):
-		$AnimatedSprite.animation = "right"
+		$AnimationPlayer.play("RSRight")
 		velocity.x += 1	
 	elif Input.is_action_pressed("move_left"):
 		velocity.x -= 1
-		$AnimatedSprite.animation = "left"
+		$AnimationPlayer.play("RSLeft")
 	else:
-		$AnimatedSprite.animation = "fly"
+		$AnimationPlayer.play("RedScarf")
 		
 	if Input.is_action_pressed("move_down"):
 		velocity.y += 1
@@ -41,14 +38,13 @@ func start(pos):
 	position = pos
 	show()
 	$CollisionShape2D.disabled = false
-
+	
 func _on_Player_body_entered(body):
 	emit_signal("hit")
 	
 	movement = movement.normalized()
 	move_and_slide(movement * speed)
-
-#CREA UNA INSTANCIA DE BALA QUE SURGE DESDE PLAYER (Ex script de Spawner)
+	
 func _unhandled_input(event):
 	if (event.is_action_pressed("shoot")):
 		var bullet = bulletScene.instance() as Node2D

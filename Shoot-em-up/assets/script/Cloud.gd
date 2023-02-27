@@ -7,7 +7,7 @@ var screen_size
 
 
 func _ready():
-	$AnimationPlayer.play("idle")
+	$AnimationPlayer.play("IdleCloud")
 	velocity.x = +speed
 	screen_size = get_viewport_rect().size
 	
