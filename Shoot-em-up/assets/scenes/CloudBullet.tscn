@@ -1,12 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://assets/art/players/particles/bullets/player_basic_attack_sheet.png" type="Texture" id=1]
-[ext_resource path="res://assets/script/bullets.gd" type="Script" id=2]
-[ext_resource path="res://assets/scenes/bulletImpact.tscn" type="PackedScene" id=3]
+[ext_resource path="res://assets/art/enemies/mobs/cloud/attack particles/electric_bullet-Sheet.png" type="Texture" id=1]
+[ext_resource path="res://assets/script/CloudBullet.gd" type="Script" id=2]
 
-[sub_resource type="CapsuleShape2D" id=1]
-radius = 4.0
-height = 6.0
+[sub_resource type="CircleShape2D" id=1]
+radius = 8.0
 
 [sub_resource type="Animation" id=2]
 length = 0.001
@@ -24,8 +22,8 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id=3]
-resource_name = "idlebullet"
-length = 0.25
+resource_name = "shoot"
+length = 0.4
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -34,28 +32,29 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ 0, 1, 2 ]
+"values": [ 0, 1 ]
 }
 
-[node name="Bullet" type="Area2D"]
-z_index = -1
+[node name="CloudBullet" type="Area2D"]
 script = ExtResource( 2 )
-bulletImpact = ExtResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, 7 )
 shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 0, 24 )
 texture = ExtResource( 1 )
-hframes = 3
+hframes = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 2 )
-anims/idlebullet = SubResource( 3 )
+anims/shoot = SubResource( 3 )
 
-[connection signal="body_entered" from="." to="." method="_on_Bullet_body_entered"]
+[node name="Despawnbullet" type="Timer" parent="."]
+wait_time = 10.0
+autostart = true
+
+[connection signal="body_entered" from="." to="." method="_on_CloudBullet_body_entered"]
+[connection signal="timeout" from="Despawnbullet" to="." method="_on_Despawnbullet_timeout"]

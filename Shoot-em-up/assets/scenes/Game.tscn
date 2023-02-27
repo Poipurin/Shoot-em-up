@@ -29,16 +29,11 @@ script = ExtResource( 8 )
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
 motion_scale = Vector2( 0.25, 1 )
-motion_mirroring = Vector2( 0, 10880 )
+motion_mirroring = Vector2( 0, 12160 )
 
 [node name="bg1" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
 texture = ExtResource( 2 )
 centered = false
-
-[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
-light_mask = 0
-motion_scale = Vector2( 1, 0 )
-motion_mirroring = Vector2( 300, 200 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 anchor_mode = 0
