@@ -1,9 +1,12 @@
 extends KinematicBody2D
 signal hit
-export var bulletScene : PackedScene
-export var speed = 400 
+
 var screen_size
 var movement = Vector2.ZERO
+var health = 3
+export var bulletScene : PackedScene
+export var speed = 400 
+
 	
 	
 func _ready():
@@ -51,3 +54,9 @@ func _unhandled_input(event):
 		get_parent().add_child(bullet)
 		bullet.global_position = self.global_position
 		bullet.direction = Vector2(0, -1)
+
+func player_hit():
+	health -= 1
+	if health == 0:
+		$AnimationPlayer.play("RSEscape")
+		queue_free()

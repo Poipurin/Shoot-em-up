@@ -4,7 +4,10 @@ var player = null
 var velocity = Vector2(0, 0)
 var speed = 40
 var screen_size
-
+var Bullet = preload ("res://assets/scenes/CloudBullet.tscn")
+var canshoot = true
+export var health = 6
+onready var spawnpos = $Spawnpos
 
 func _ready():
 	$AnimationPlayer.play("IdleCloud")
@@ -14,11 +17,8 @@ func _ready():
 func _on_VisibilityNotifier2D_screen_exited():
 	queue_free()
 
-func _on_detection_body_entered(body):
-	if body.is_in_group("Player"):
-		player = body
 		
-func _process(delta):
+func _physics_process(delta):
 	move_character()
 	
 	
@@ -28,5 +28,28 @@ func move_character():
 	elif position.x < -210:
 		velocity.x = +speed
 	
-	
 	velocity = move_and_slide(velocity, Vector2.UP)
+	
+func _on_Detection_body_entered(body):
+	if body.is_in_group("Player"):
+		player = body
+	
+func _on_ShootSpeed_timeout():
+	canshoot = true
+	if player != null:
+		$AnimationPlayer.play("PreparingA")
+		shoot()
+	
+func shoot():
+	if canshoot:
+		var bullet = Bullet.instance()
+		bullet.position = spawnpos.global_position
+		get_parent().add_child(bullet)
+		$AnimationPlayer.play("Attack")
+		$ShootSpeed.start()
+		canshoot = false
+		
+func enemy_hit():
+	health -=1
+	if health == 0:
+		$AnimationPlayer.play("Death")
