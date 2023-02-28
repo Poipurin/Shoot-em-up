@@ -7,7 +7,6 @@ var screen_size
 var Bullet = preload ("res://assets/scenes/CloudBullet.tscn")
 var canshoot = true
 export var health = 6
-onready var spawnpos = $Spawnpos
 
 func _ready():
 	$AnimationPlayer.play("IdleCloud")
@@ -20,7 +19,7 @@ func _on_VisibilityNotifier2D_screen_exited():
 		
 func _physics_process(delta):
 	move_character()
-	
+	position += velocity * delta
 	
 func move_character():
 	if position.x > 220:
@@ -33,7 +32,9 @@ func move_character():
 func _on_Detection_body_entered(body):
 	if body.is_in_group("Player"):
 		player = body
-	
+		$ShootSpeed.start()
+		print(player)
+		
 func _on_ShootSpeed_timeout():
 	canshoot = true
 	if player != null:
@@ -43,10 +44,10 @@ func _on_ShootSpeed_timeout():
 func shoot():
 	if canshoot:
 		var bullet = Bullet.instance()
-		bullet.position = spawnpos.global_position
+		bullet.position = $Cloud.position
 		get_parent().add_child(bullet)
 		$AnimationPlayer.play("Attack")
-		$ShootSpeed.start()
+		
 		canshoot = false
 		
 func enemy_hit():

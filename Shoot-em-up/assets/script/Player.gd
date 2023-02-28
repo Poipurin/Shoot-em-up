@@ -2,8 +2,7 @@ extends KinematicBody2D
 signal hit
 
 var screen_size
-var movement = Vector2.ZERO
-var health = 3
+var health = 1
 export var bulletScene : PackedScene
 export var speed = 400 
 
@@ -12,7 +11,6 @@ export var speed = 400
 func _ready():
 	screen_size = get_viewport_rect().size
 	position = Vector2(240, 600)
-	$AnimationPlayer.play("RedScarf")
 	
 func _physics_process(delta):
 	var velocity = Vector2.ZERO 
@@ -37,16 +35,16 @@ func _physics_process(delta):
 		position.x = clamp(position.x, 0, screen_size.x)
 		position.y = clamp(position.y, 0, screen_size.y)
 		print(position)
+
+
 func start(pos):
 	position = pos
 	show()
 	$CollisionShape2D.disabled = false
 	
-func _on_Player_body_entered(body):
+func _on_Player_body_entered():
 	emit_signal("hit")
 	
-	movement = movement.normalized()
-	move_and_slide(movement * speed)
 	
 func _unhandled_input(event):
 	if (event.is_action_pressed("shoot")):
@@ -54,9 +52,11 @@ func _unhandled_input(event):
 		get_parent().add_child(bullet)
 		bullet.global_position = self.global_position
 		bullet.direction = Vector2(0, -1)
-
+		
 func player_hit():
 	health -= 1
-	if health == 0:
+	if health <=0:
 		$AnimationPlayer.play("RSEscape")
+		print("it hurts")
 		queue_free()
+

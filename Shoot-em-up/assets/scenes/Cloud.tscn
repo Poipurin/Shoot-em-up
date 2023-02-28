@@ -120,7 +120,7 @@ tracks/0/keys = {
 }
 
 [sub_resource type="RectangleShape2D" id=13]
-extents = Vector2( 292, 353 )
+extents = Vector2( 72, 184 )
 
 [node name="Cloud" type="KinematicBody2D" groups=["Cloud"]]
 script = ExtResource( 3 )
@@ -150,13 +150,10 @@ anims/idle = SubResource( 8 )
 wait_time = 0.3
 one_shot = true
 
-[node name="Spawnpos" type="Position2D" parent="."]
-position = Vector2( 0, 16 )
-
 [node name="Detection" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Detection"]
-position = Vector2( -4, 343 )
+position = Vector2( 0, 184 )
 shape = SubResource( 13 )
 
 [connection signal="timeout" from="ShootSpeed" to="." method="_on_ShootSpeed_timeout"]
