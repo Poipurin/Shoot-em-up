@@ -2,7 +2,8 @@ extends KinematicBody2D
 signal hit
 
 var screen_size
-var health = 1
+var health = 3
+var isdead = false
 export var bulletScene : PackedScene
 export var speed = 400 
 
@@ -14,30 +15,33 @@ func _ready():
 	
 func _physics_process(delta):
 	var velocity = Vector2.ZERO 
-	if Input.is_action_pressed("move_right"):
-		$AnimationPlayer.play("RSRight")
-		velocity.x += 1	
-	elif Input.is_action_pressed("move_left"):
-		velocity.x -= 1
-		$AnimationPlayer.play("RSLeft")
+	if health > 0:
+		if Input.is_action_pressed("move_right"):
+			$AnimationPlayer.play("RSRight")
+			velocity.x += 1	
+		elif Input.is_action_pressed("move_left"):
+			velocity.x -= 1
+			$AnimationPlayer.play("RSLeft")
+		else:
+			$AnimationPlayer.play("RedScarf")
+		
+		if Input.is_action_pressed("move_down"):
+			velocity.y += 1
+		
+		if Input.is_action_pressed("move_up"):
+			velocity.y -= 1
+		
+		if velocity.length() > 0:
+			velocity = velocity.normalized() * speed
+			position += velocity * delta
+			position.x = clamp(position.x, 0, screen_size.x)
+			position.y = clamp(position.y, 0, screen_size.y)
+			print(position)
 	else:
-		$AnimationPlayer.play("RedScarf")
-		
-	if Input.is_action_pressed("move_down"):
-		velocity.y += 1
-		
-	if Input.is_action_pressed("move_up"):
-		velocity.y -= 1
-		
-	if velocity.length() > 0:
-		velocity = velocity.normalized() * speed
-		position += velocity * delta
-		position.x = clamp(position.x, 0, screen_size.x)
-		position.y = clamp(position.y, 0, screen_size.y)
-		print(position)
-
+		$AnimationPlayer.play("RSEscape")
 
 func start(pos):
+	health >= 0
 	position = pos
 	show()
 	$CollisionShape2D.disabled = false
@@ -55,8 +59,6 @@ func _unhandled_input(event):
 		
 func player_hit():
 	health -= 1
-	if health <=0:
-		$AnimationPlayer.play("RSEscape")
+	if health == 0:
 		print("it hurts")
-		queue_free()
 
